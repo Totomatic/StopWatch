@@ -1,5 +1,6 @@
 package com.example.thoma.stopwatch;
 
+import android.content.res.Configuration;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,11 @@ public class StopWatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_watch);
+        if (savedInstanceState != null)
+        {
+            seconds = savedInstanceState.getInt("seconds");
+            running = savedInstanceState.getBoolean("running");
+        }
         runTimer();
     }
 
@@ -55,5 +61,15 @@ public class StopWatchActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void onConfigurationChanged(Configuration config)
+    {
+
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState)
+    {
+        savedInstanceState.putInt("seconds",seconds);
+        savedInstanceState.putBoolean("running",running);
     }
 }
